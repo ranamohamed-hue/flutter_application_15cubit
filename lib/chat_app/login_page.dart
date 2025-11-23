@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_15cubit/chat_app/signin_verification.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  bool obscureText = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,33 +45,17 @@ class _LoginState extends State<Login> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 40),
-                Center(
-                  child: Container(
-                    height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: const Color.fromARGB(255, 140, 52, 158),
-                    ),
-
-                    child: Icon(
-                      Icons.person,
-                      size: 40,
-                      color: const Color.fromARGB(255, 230, 221, 221),
-                    ),
-                  ),
+                const Text(
+                  'Login On Your Account',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 15),
                 _buildtabs(),
-                SizedBox(height: 30),
-                _buildPhoneInputField('Name', 'Enter yourname'),
-                SizedBox(height: 20),
+                const SizedBox(height: 30),
                 _buildPhoneInputField('Phone Number', '+43 123-456-7890'),
-
-                SizedBox(height: 40),
-
+                SizedBox(height: 70),
                 _buildNextStepButton(context),
-                SizedBox(height: 40),
+                SizedBox(height: 100),
                 _buildSignUpText(),
               ],
             ),
@@ -155,29 +138,11 @@ Widget _buildNextStepButton(BuildContext context) {
   return Center(
     child: SizedBox(
       child: ElevatedButton.icon(
-        onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            PageRouteBuilder(
-              pageBuilder:
-                  (context, animation, secondaryAnimation) =>
-                      SigninVerification(),
-              transitionDuration: Duration(milliseconds: 400),
-              transitionsBuilder: (
-                context,
-                animation,
-                secondaryAnimation,
-                child,
-              ) {
-                return FadeTransition(opacity: animation, child: child);
-              },
-            ),
-          );
-        },
+        onPressed: () {},
 
-        icon: const Icon(Icons.fast_forward, color: Colors.white),
+        icon: const Icon(Icons.fast_forward, color: Colors.white, size: 15),
         label: const Text(
-          'Next Step',
+          '  Next Step   ',
           style: TextStyle(color: Colors.white, fontSize: 15),
         ),
         style: ElevatedButton.styleFrom(
@@ -199,13 +164,13 @@ Widget _buildSignUpText() {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text(
-          "You Have Account?",
+          "Don't Have Account?",
           style: TextStyle(color: Colors.black54, fontSize: 15),
         ),
         TextButton(
           onPressed: () {},
           child: const Text(
-            'Login',
+            'Signin',
             style: TextStyle(
               color: Colors.purpleAccent,
               fontWeight: FontWeight.bold,

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_15cubit/chat_app/signin_verification.dart';
+import 'package:flutter_application_15cubit/chat_app/login_page.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class SigninVerification extends StatefulWidget {
+  const SigninVerification({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<SigninVerification> createState() => _SigninVerificationState();
 }
 
-class _LoginState extends State<Login> {
+class _SigninVerificationState extends State<SigninVerification> {
   final _formKey = GlobalKey<FormState>();
-  bool obscureText = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +35,6 @@ class _LoginState extends State<Login> {
           ),
         ),
       ),
-
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
@@ -46,34 +44,21 @@ class _LoginState extends State<Login> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 40),
-                Center(
-                  child: Container(
-                    height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: const Color.fromARGB(255, 140, 52, 158),
-                    ),
-
-                    child: Icon(
-                      Icons.person,
-                      size: 40,
-                      color: const Color.fromARGB(255, 230, 221, 221),
-                    ),
-                  ),
+                const Text(
+                  'Login On Your Account',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 15),
+                _buildtabss(),
+                const SizedBox(height: 30),
+                _buildVerificationInputField(
+                  'User Verification Number',
+                  'User Verification Number...',
                 ),
                 SizedBox(height: 30),
-                _buildtabs(),
-                SizedBox(height: 30),
-                _buildPhoneInputField('Name', 'Enter yourname'),
-                SizedBox(height: 20),
-                _buildPhoneInputField('Phone Number', '+43 123-456-7890'),
-
-                SizedBox(height: 40),
-
                 _buildNextStepButton(context),
                 SizedBox(height: 40),
-                _buildSignUpText(),
+                _buildSignUpText(context),
               ],
             ),
           ),
@@ -83,23 +68,30 @@ class _LoginState extends State<Login> {
   }
 }
 
-Widget _buildtabs() {
+Widget _buildtabss() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildTabContent('Login', Icons.login_outlined, true),
           SizedBox(width: 40),
-          _buildTabContent('Verification', Icons.verified_outlined, false),
+          _buildTabContent('Login', Icons.login_outlined, false),
+          SizedBox(width: 60),
+          _buildTabContent('Verification', Icons.verified_outlined, true),
         ],
       ),
-      Container(
-        height: 5,
-        width: 130,
-        color: Colors.purpleAccent,
-        margin: EdgeInsets.only(top: 9),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+
+        children: [
+          SizedBox(width: 100),
+          Container(
+            height: 5,
+            width: 115,
+            color: Colors.purpleAccent,
+            margin: EdgeInsets.only(top: 5),
+          ),
+        ],
       ),
     ],
   );
@@ -122,9 +114,9 @@ Widget _buildTabContent(String title, IconData icon, bool isactive) {
   );
 }
 
-Widget _buildPhoneInputField(String titlet, String hintText) {
+Widget _buildVerificationInputField(String titlet, String hintText) {
   return TextFormField(
-    keyboardType: TextInputType.phone,
+    keyboardType: TextInputType.number,
     decoration: InputDecoration(
       labelText: titlet,
       hintText: hintText,
@@ -161,7 +153,7 @@ Widget _buildNextStepButton(BuildContext context) {
             PageRouteBuilder(
               pageBuilder:
                   (context, animation, secondaryAnimation) =>
-                      SigninVerification(),
+                      LoginPage(),
               transitionDuration: Duration(milliseconds: 400),
               transitionsBuilder: (
                 context,
@@ -175,10 +167,10 @@ Widget _buildNextStepButton(BuildContext context) {
           );
         },
 
-        icon: const Icon(Icons.fast_forward, color: Colors.white),
+        icon: const Icon(Icons.login_outlined, color: Colors.white, size: 15),
         label: const Text(
-          'Next Step',
-          style: TextStyle(color: Colors.white, fontSize: 15),
+          ' Login  ',
+          style: TextStyle(color: Colors.white, fontSize: 20),
         ),
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.purple,
@@ -193,19 +185,39 @@ Widget _buildNextStepButton(BuildContext context) {
   );
 }
 
-Widget _buildSignUpText() {
+Widget _buildSignUpText(BuildContext context) {
   return Center(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text(
-          "You Have Account?",
+          "Did Not Recive Code?",
           style: TextStyle(color: Colors.black54, fontSize: 15),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+
+
+              Navigator.pushReplacement(
+            context,
+            PageRouteBuilder(
+              pageBuilder:
+                  (context, animation, secondaryAnimation) =>
+                      SigninVerification(),
+              transitionDuration: Duration(milliseconds: 400),
+              transitionsBuilder: (
+                context,
+                animation,
+                secondaryAnimation,
+                child,
+              ) {
+                return FadeTransition(opacity: animation, child: child);
+              },
+            ),
+          );
+          },
           child: const Text(
-            'Login',
+            'Try Again',
             style: TextStyle(
               color: Colors.purpleAccent,
               fontWeight: FontWeight.bold,

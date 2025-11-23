@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_15cubit/chat_app/splashlogin.dart';
 import 'package:flutter_application_15cubit/counter/countercubit.dart';
 import 'package:flutter_application_15cubit/newsapp/articlecubit.dart';
 import 'package:flutter_application_15cubit/newsapp/newscubit.dart';
@@ -23,6 +24,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: Splash());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: Splash_login());
   }
 }

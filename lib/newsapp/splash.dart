@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_15cubit/newsapp/newsapp.dart';
 import 'package:shimmer/shimmer.dart';
 
-class Splash extends StatefulWidget {
-  const Splash({super.key});
+class Splashl extends StatefulWidget {
+  const Splashl({super.key});
 
   @override
-  State<Splash> createState() => _SplashState();
+  State<Splashl> createState() => _SplashlState();
 }
 
-class _SplashState extends State<Splash> {
+class _SplashlState extends State<Splashl> {
   @override
   void initState() {
     super.initState();

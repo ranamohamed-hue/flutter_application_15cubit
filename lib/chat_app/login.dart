@@ -14,6 +14,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  bool isLogin = true;
   final _formKey = GlobalKey<FormState>();
   bool obscureText = true;
   @override
@@ -46,7 +47,17 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 SizedBox(height: 30),
-                Buildtags(isLoginActive: true),
+
+                Buildtags(
+                  isLoginActive: isLogin,
+                  onlogintap: () {
+                    setState(() => isLogin = true);
+                  },
+                  onverification: () {
+                    setState(() => isLogin = false);
+                  },
+                ),
+
                 SizedBox(height: 30),
                 Buildphoneinputfield(
                   title: 'Name',

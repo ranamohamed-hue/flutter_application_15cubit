@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 
 class Buildtags extends StatelessWidget {
   final bool isLoginActive;
-  const Buildtags({super.key, required this.isLoginActive});
+  final VoidCallback onlogintap;
+  final VoidCallback onverification;
+
+  const Buildtags({
+    super.key,
+    required this.isLoginActive,
+    required this.onlogintap,
+    required this.onverification,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,16 +20,22 @@ class Buildtags extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildTabContent('Login', Icons.login_outlined, isLoginActive),
+            GestureDetector(
+              onTap: onlogintap,
+              child: _buildTabContent(
+                'Login',
+                Icons.login_outlined,
+                isLoginActive,
+              ),
+            ),
             SizedBox(width: 40),
-            Column(
-              children: [
-                _buildTabContent(
-                  'Verification',
-                  Icons.verified_outlined,
-                  !isLoginActive,
-                ),
-              ],
+            GestureDetector(
+              onTap: onverification,
+              child: _buildTabContent(
+                'Verification',
+                Icons.verified_outlined,
+                !isLoginActive,
+              ),
             ),
           ],
         ),
@@ -54,11 +68,7 @@ class Buildtags extends StatelessWidget {
 
         const SizedBox(height: 4),
         isactive
-            ? Container(
-              height: 5,
-              width: 120,
-              color: Colors.purple,
-            )
+            ? Container(height: 5, width: 120, color: Colors.purple)
             : const SizedBox(height: 5, width: 120),
       ],
     );
